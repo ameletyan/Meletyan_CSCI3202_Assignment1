@@ -90,6 +90,7 @@ class Node:
 class BinTree:
 	def __init__(self, root):
 		self.root = root
+		self.total_nodes = 1
 		
 		# cursor to help with selecting nodes
 		self.cursor = self.root
@@ -130,10 +131,12 @@ class BinTree:
 			# add the new node as the left child if the parent has no children
 			if(parent.getLeftChild() == None):
 				parent.setLeftChild(Node(value, parent))
+				self.total_nodes += 1
 			
 			# add the new node as the right child if the parent has a left child only
 			elif(parent.getRightChild() == None):
 				parent.setRightChild(Node(value, parent))
+				self.total_nodes += 1
 			
 			# do not add the node if the parent already has two children, print a message stating that
 			else:
@@ -168,10 +171,15 @@ class BinTree:
 				
 				# delete the node
 				del node
+				self.total_nodes -= 1
 	
 	# print the tree
 	def printTree():
 		self.cursor = self.root
+		nodes_remaining = self.total_nodes
+		
+		while(nodes_remaining != 0):
+			
 
 # Graph class
 class Graph:
