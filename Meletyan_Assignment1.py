@@ -95,6 +95,8 @@ class BinTree:
 		self.cursor = self.root
 	
 	def search(self, value):
+		initCursor = self.cursor
+		
 		# if the node on the cursor has the desired value, return the node
 		if(self.cursor.getIntKey() == value):
 			return self.cursor
@@ -103,11 +105,15 @@ class BinTree:
 		else:
 			if(self.cursor.getLeftChild() != None):
 				self.cursor = self.cursor.getLeftChild()
-				self.search(value)
-				
-			if(self.cursor.getRightChild() != None):
-				self.cursor = self.cursor.getRightChild()
-				self.search(value)
+				leftSearch = self.search(value)
+				if(leftSearch == None):
+					if(initCursor.getRightChild() != None):
+						self.cursor = initCursor.getRightChild()
+						return self.search(value)
+					else:
+						return leftSearch
+				else:
+					return leftSearch
 	
 	# add nodes to the binary tree
 	def add(self, value, parentValue):
@@ -218,10 +224,6 @@ node1 = Node(7)
 tree = BinTree(node1)
 tree.add(12, 7)
 tree.add(15, 7)
-
-print node1.getLeftChild().getIntKey()
-print node1.getRightChild().getIntKey()
-
 
 print "Testing has begun!"
 #testQueue()
