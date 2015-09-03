@@ -44,32 +44,13 @@ class Stack:
 	def printStack(self):
 		print self.stack
 
-# node class used for Binary Tree and Graph classes
+# Node class used for Binary Tree class
 class Node:
-	def __init__(self, intKey, parent = None):
+	def __init__(self, intKey):
 		self.integerKey = intKey
 		self.leftChild = None
 		self.rightChild = None
 		self.parent = None
-		self.root = True
-		self.nodes = {"left": None, "right": None}
-		
-		# if a parent node exists, then this node is not a root node
-		if(parent != None):
-			self.root = False
-		if(self.root == False):
-			self.parent = parent
-			
-			# add this node to the parent's left/right slot if possible
-			if(self.parent.getLeftChild() == None):
-				self.parent.setLeftChild(self)
-	
-	# returns True if this node is the root node
-	def isRoot(self):
-		if(self.root == True):
-			return True
-		else:
-			return False
 	
 	#GETTERS
 	# getter for the integer key
@@ -105,16 +86,23 @@ class Node:
 
 # Binary Tree class
 class BinTree:
-	rootNode = Node(0)
-	
-	def __init__(self, root = rootNode):
-		self.tree = {}
+	def __init__(self, root):
 		self.root = root
+		self.totalNodes = 1
+		self.tree = {"root": self.root}
+		
+		# cursor to help with selecting nodes
 		self.cursor = self.root
-		self.totalNodes = 0
 	
-	def addNode(self, parentNode):
-		self.cursor = parentNode
+	# add nodes to the binary tree
+	def add(self, value, parentValue):
+		self.cursor = self.root
+		
+		# add the new node as the left child if the parent has no children
+		
+		# add the new node as the right child if the parent has a left child only
+		
+		# do not add the node if the parent already has two children
 
 # Graph class
 class Graph:
@@ -197,13 +185,7 @@ def testGraph():
 # MAIN
 # runs all tests
 
-node1 = Node(1)
-node2 = Node(2, node1)
-print node1.getLeftChild()
-print node1.isRoot()
-print node1.getIntKey()
-print node2.getParent().getIntKey()
-print node2.isRoot()
+
 
 print "Testing has begun!"
 #testQueue()
