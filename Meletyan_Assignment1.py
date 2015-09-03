@@ -168,6 +168,10 @@ class BinTree:
 				
 				# delete the node
 				del node
+	
+	# print the tree
+	def printTree():
+		self.cursor = self.root
 
 # Graph class
 class Graph:
