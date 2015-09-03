@@ -122,7 +122,7 @@ class BinTree:
 		# find the node with an integer key of parentValue
 		# if parentValue is not found in the tree, print a message stating that
 		if(self.search(parentValue) == None):
-			print "Parent not found"
+			print "Parent not found."
 		else:
 			self.cursor = self.root
 			parent = self.search(parentValue)
@@ -137,7 +137,37 @@ class BinTree:
 			
 			# do not add the node if the parent already has two children, print a message stating that
 			else:
-				print "Parent has two children, node not added"
+				print "Parent has two children, node not added."
+	
+	# delete nodes that do not have children
+	def delete(self, value):
+		self.cursor = self.root
+		
+		# find the node with an integer key of value
+		# if the node is not found, print a message stating that
+		if(self.search(value) == None):
+			print "Node not found."
+		else:
+			self.cursor = self.root
+			node = self.search(value)
+			
+			# if a node has 1 or 2 children, do not delete the node and print a message stating that
+			if((node.getLeftChild() != None)or(node.getRightChild() != None)):
+				print "Node not deleted, has children."
+			
+			# if the node can be deleted, delete it
+			else:
+				# remove the node's reference from its parent
+				if(node.parent.getLeftChild() == node):
+					node.parent.setLeftChild(None)
+				if(node.parent.getRightChild() == node):
+					node.parent.setRightChild(None)
+				
+				# remove the node's references to its parent from itself
+				node.setParent(None)
+				
+				# delete the node
+				del node
 
 # Graph class
 class Graph:
