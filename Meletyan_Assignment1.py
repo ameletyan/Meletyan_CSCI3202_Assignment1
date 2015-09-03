@@ -46,26 +46,26 @@ class Stack:
 
 # Node class used for Binary Tree class
 class Node:
-	def __init__(self, intKey):
-		self.integerKey = intKey
+	def __init__(self, value, parent = None):
+		self.integerKey = value
 		self.leftChild = None
 		self.rightChild = None
-		self.parent = None
+		self.parent = parent
 	
 	#GETTERS
 	# getter for the integer key
 	def getIntKey(self):
 		return self.integerKey
 	
-	# getter for the left child
+	# getter for the left child node
 	def getLeftChild(self):
 		return self.leftChild
 	
-	# getter for the right child
+	# getter for the right child node
 	def getRightChild(self):
 		return self.rightChild
 	
-	# getter for the parent
+	# getter for the parent node
 	def getParent(self):
 		return self.parent
 	
@@ -74,35 +74,64 @@ class Node:
 	def setIntKey(self, i):
 		self.integerKey = i
 	
-	# setter for the left child
+	# setter for the left child node
 	def setLeftChild(self, node):
 		self.leftChild = node
-		self.nodes["left"] = node
 	
-	# setter for the right child
+	# setter for the right child node
 	def setRightChild(self, node):
 		self.rightChild = node
-		self.nodes["right"] = node
+	
+	# setter for the parent node
+	def setParent(self, parentNode):
+		self.parent = parentNode
 
 # Binary Tree class
 class BinTree:
 	def __init__(self, root):
 		self.root = root
-		self.totalNodes = 1
-		self.tree = {"root": self.root}
 		
 		# cursor to help with selecting nodes
 		self.cursor = self.root
+	
+	def search(self, value):
+		# if the node on the cursor has the desired value, return the node
+		if(self.cursor.getIntKey() == value):
+			return self.cursor
+		
+		# else, keep searching
+		else:
+			if(self.cursor.getLeftChild() != None):
+				self.cursor = self.cursor.getLeftChild()
+				self.search(value)
+				
+			if(self.cursor.getRightChild() != None):
+				self.cursor = self.cursor.getRightChild()
+				self.search(value)
 	
 	# add nodes to the binary tree
 	def add(self, value, parentValue):
 		self.cursor = self.root
 		
-		# add the new node as the left child if the parent has no children
-		
-		# add the new node as the right child if the parent has a left child only
-		
-		# do not add the node if the parent already has two children
+		# find the node with an integer key of parentValue
+		# if parentValue is not found in the tree, print a message stating that
+		if(self.search(parentValue) == None):
+			print "Parent not found"
+		else:
+			self.cursor = self.root
+			parent = self.search(parentValue)
+			
+			# add the new node as the left child if the parent has no children
+			if(parent.getLeftChild() == None):
+				parent.setLeftChild(Node(value, parent))
+			
+			# add the new node as the right child if the parent has a left child only
+			elif(parent.getRightChild() == None):
+				parent.setRightChild(Node(value, parent))
+			
+			# do not add the node if the parent already has two children, print a message stating that
+			else:
+				print "Parent has two children, node not added"
 
 # Graph class
 class Graph:
@@ -185,6 +214,13 @@ def testGraph():
 # MAIN
 # runs all tests
 
+node1 = Node(7)
+tree = BinTree(node1)
+tree.add(12, 7)
+tree.add(15, 7)
+
+print node1.getLeftChild().getIntKey()
+print node1.getRightChild().getIntKey()
 
 
 print "Testing has begun!"
