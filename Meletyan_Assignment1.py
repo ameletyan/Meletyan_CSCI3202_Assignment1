@@ -90,7 +90,6 @@ class Node:
 class BinTree:
 	def __init__(self, root):
 		self.root = root
-		self.total_nodes = 1
 		
 		# cursor to help with selecting nodes
 		self.cursor = self.root
@@ -131,12 +130,10 @@ class BinTree:
 			# add the new node as the left child if the parent has no children
 			if(parent.getLeftChild() == None):
 				parent.setLeftChild(Node(value, parent))
-				self.total_nodes += 1
 			
 			# add the new node as the right child if the parent has a left child only
 			elif(parent.getRightChild() == None):
 				parent.setRightChild(Node(value, parent))
-				self.total_nodes += 1
 			
 			# do not add the node if the parent already has two children, print a message stating that
 			else:
@@ -171,15 +168,25 @@ class BinTree:
 				
 				# delete the node
 				del node
-				self.total_nodes -= 1
 	
-	# print the tree
-	def printTree():
-		self.cursor = self.root
-		nodes_remaining = self.total_nodes
+	# traverse through a tree and print out the traversed nodes
+	def printTraversal(self):
+		initCursor = self.cursor
+		print self.cursor.getIntKey()
 		
-		while(nodes_remaining != 0):
-			
+		if(self.cursor.getLeftChild() != None):
+			self.cursor = self.cursor.getLeftChild()
+			self.printTraversal()
+		
+		self.cursor = initCursor
+		if(self.cursor.getRightChild() != None):
+			self.cursor = self.cursor.getRightChild()
+			self.printTraversal()
+	
+	# reset cursor to root and print the tree
+	def printTree(self):
+		self.cursor = self.root
+		self.printTraversal()
 
 # Graph class
 class Graph:
@@ -241,10 +248,40 @@ def testStack():
 def testBinTree():
 	print "\n\nTesting the Binary Tree class..."
 	
+	# create a binary tree
+	print "\nCreating Binary Tree..."
+	tree = BinTree(Node(0))
+	print "Successfully created Binary Tree!"
+	
 	# add 10 integers as nodes to the tree
+	print "\nAdding integers 1 through 10 to the tree..."
+	tree.add(1, 0)
+	tree.add(2, 0)
+	tree.add(3, 1)
+	tree.add(4, 1)
+	tree.add(5, 2)
+	tree.add(6, 2)
+	tree.add(7, 3)
+	tree.add(8, 3)
+	tree.add(9, 4)
+	tree.add(10, 4)
+	print "Successfully added integers to the tree!"
+	
 	# print the tree
+	print "\nPrinting the tree..."
+	tree.printTree()
+	print "Successfully printed the tree!"
+	
 	# delete 2 integers from the tree
+	print "\nDeleting 2 integers from the tree..."
+	tree.delete(6)
+	tree.delete(10)
+	print "Successfully deleted 2 integers from the tree!"
+	
 	# print the tree
+	print "\nPrinting the tree..."
+	tree.printTree()
+	print "Successfully printed the tree!"
 	
 	print "\nSuccessfull tested the Binary Tree class!  It works"
 	return 0
@@ -261,11 +298,6 @@ def testGraph():
 
 # MAIN
 # runs all tests
-
-node1 = Node(7)
-tree = BinTree(node1)
-tree.add(12, 7)
-tree.add(15, 7)
 
 print "Testing has begun!"
 #testQueue()
