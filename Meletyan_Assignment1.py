@@ -2,26 +2,7 @@
 
 from Queue import *
 
-# Queue class
-class Queue:
-	def __init__(self):
-		self.queue = deque([])
-	
-	# adds an integer to the end of the queue
-	def push(self, i):
-		self.deque.append(i)
-	
-	# removes the integer at the start of the queue
-	def dequeue(self):
-		return self.deque.popleft()
-	
-	# returns the amount of integers in the queue
-	def checkSize(self):
-		return len(self.deque)
-	
-	# prints the whole queue (for personal testing)
-	def printQueue(self):
-		print self.deque
+# no class for making a queue is necessary for this assignment
 
 # Stack class
 class Stack:
@@ -240,23 +221,57 @@ class Graph:
 		if(value in self.vertices):
 			adjVertList = self.vertices[value].getAdjVert()
 			total = len(adjVertList)
+			print "\nVertices adjacent to ", value, ":"
 			for i in range(0, total):
 				print adjVertList[i].getVal()
+			print ""
 
 def testQueue():
 	print "\n\nTesting the Queue class..."
 	
 	# create queue
-	print "Creating queue..."
-	queue = Queue()
+	print "\nCreating queue..."
+	queue = Queue(10)
 	print "Successfully created queue!"
 	
 	# add 10 integers to the queue
 	print "\nAdding integers 1 through 10 to the queue..."
-	
+	print "Adding 1 to the queue..."
+	queue.put(1)
+	print "Adding 2 to the queue..."
+	queue.put(2)
+	print "Adding 3 to the queue..."
+	queue.put(3)
+	print "Adding 4 to the queue..."
+	queue.put(4)
+	print "Adding 5 to the queue..."
+	queue.put(5)
+	print "Adding 6 to the queue..."
+	queue.put(6)
+	print "Adding 7 to the queue..."
+	queue.put(7)
+	print "Adding 8 to the queue..."
+	queue.put(8)
+	print "Adding 9 to the queue..."
+	queue.put(9)
+	print "Adding 10 to the queue..."
+	queue.put(10)
+	print "Successfully added the integers to the queue!"
 	# dequeue them and print the values
+	print "\nCommencing to dequeue the values..."
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print queue.get()
+	print "Successfully dequeued the values!"
 	
-	print "Successfully tested the Queue class!  It works!"
+	print "\nSuccessfully tested the Queue class!  It works!"
 	return 0
 
 def testStack():
@@ -306,15 +321,25 @@ def testBinTree():
 	
 	# add 10 integers as nodes to the tree
 	print "\nAdding integers 1 through 10 to the tree..."
+	print "Adding 1 to the tree..."
 	tree.add(1, 0)
+	print "Adding 2 to the tree..."
 	tree.add(2, 0)
+	print "Adding 3 to the tree..."
 	tree.add(3, 1)
+	print "Adding 4 to the tree..."
 	tree.add(4, 1)
+	print "Adding 5 to the tree..."
 	tree.add(5, 2)
+	print "Adding 6 to the tree..."
 	tree.add(6, 2)
+	print "Adding 7 to the tree..."
 	tree.add(7, 3)
+	print "Adding 8 to the tree..."
 	tree.add(8, 3)
+	print "Adding 9 to the tree..."
 	tree.add(9, 4)
+	print "Adding 10 to the tree..."
 	tree.add(10, 4)
 	print "Successfully added integers to the tree!"
 	
@@ -325,7 +350,9 @@ def testBinTree():
 	
 	# delete 2 integers from the tree
 	print "\nDeleting 2 integers from the tree..."
+	print "Deleting 6 from the tree..."
 	tree.delete(6)
+	print "Deleting 10 from the tree..."
 	tree.delete(10)
 	print "Successfully deleted 2 integers from the tree!"
 	
@@ -340,9 +367,92 @@ def testBinTree():
 def testGraph():
 	print "\n\nTesting the Graph class..."
 	
+	# create a graph
+	print "\nCreating a graph..."
+	graph = Graph()
+	print "Successfully created a graph!"
+	
 	# add 10 integers as vertices to the graph
+	print "\nAdding integers 1 through 10 as vertices to the graph..."
+	print "Adding 1 to the graph..."
+	graph.addVertex(1)
+	print "Adding 2 to the graph..."
+	graph.addVertex(2)
+	print "Adding 3 to the graph..."
+	graph.addVertex(3)
+	print "Adding 4 to the graph..."
+	graph.addVertex(4)
+	print "Adding 5 to the graph..."
+	graph.addVertex(5)
+	print "Adding 6 to the graph..."
+	graph.addVertex(6)
+	print "Adding 7 to the graph..."
+	graph.addVertex(7)
+	print "Adding 8 to the graph..."
+	graph.addVertex(8)
+	print "Adding 9 to the graph..."
+	graph.addVertex(9)
+	print "Adding 10 to the graph..."
+	graph.addVertex(10)
+	print "Successfully added the vertices to the graph!"
+	
 	# add 20 edges to the graph
+	print "\nAdding 20 edges to the graph..."
+	print "Adding an edge between 1 and 2..."
+	graph.addEdge(1, 2)
+	print "Adding an edge between 2 and 3..."
+	graph.addEdge(2, 3)
+	print "Adding an edge between 3 and 4..."
+	graph.addEdge(3, 4)
+	print "Adding an edge between 4 and 5..."
+	graph.addEdge(4, 5)
+	print "Adding an edge between 5 and 6..."
+	graph.addEdge(5, 6)
+	print "Adding an edge between 6 and 7..."
+	graph.addEdge(6, 7)
+	print "Adding an edge between 7 and 8..."
+	graph.addEdge(7, 8)
+	print "Adding an edge between 8 and 9..."
+	graph.addEdge(8, 9)
+	print "Adding an edge between 9 and 10..."
+	graph.addEdge(9, 10)
+	print "Adding an edge between 10 and 1..."
+	graph.addEdge(10, 1)
+	print "Adding an edge between 1 and 3..."
+	graph.addEdge(1, 3)
+	print "Adding an edge between 2 and 4..."
+	graph.addEdge(2, 4)
+	print "Adding an edge between 3 and 5..."
+	graph.addEdge(3, 5)
+	print "Adding an edge between 4 and 6..."
+	graph.addEdge(4, 6)
+	print "Adding an edge between 5 and 7..."
+	graph.addEdge(5, 7)
+	print "Adding an edge between 6 and 8..."
+	graph.addEdge(6, 8)
+	print "Adding an edge between 7 and 9..."
+	graph.addEdge(7, 9)
+	print "Adding an edge between 8 and 10..."
+	graph.addEdge(8, 10)
+	print "Adding an edge between 9 and 1..."
+	graph.addEdge(9, 1)
+	print "Adding an edge between 10 and 2..."
+	graph.addEdge(10, 2)
+	print "Successfully added 20 edges to the graph!"
+	
 	# find 5 vertices
+	print "\nLooking for 5 vertices..."
+	print "Looking for a vertex with a value of 1..."
+	graph.findVertex(1)
+	print "Looking for a vertex with a value of 2..."
+	graph.findVertex(2)
+	print "Looking for a vertex with a value of 3..."
+	graph.findVertex(3)
+	print "Looking for a vertex with a value of 4..."
+	graph.findVertex(4)
+	print "Looking for a vertex with a value of 5..."
+	graph.findVertex(5)
+	print "Successfully found 5 vertices!"
 	
 	print "\nSuccessfull tested the Graph class!  It works"
 	return 0
@@ -350,10 +460,9 @@ def testGraph():
 # MAIN
 # runs all tests
 
-
 print "Testing has begun!"
-#testQueue()
-#testStack()
-#testBinTree()
-#testGraph()
+testQueue()
+testStack()
+testBinTree()
+testGraph()
 print "\n\nSuccessfully completed all tests!"
