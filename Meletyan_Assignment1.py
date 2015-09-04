@@ -52,7 +52,7 @@ class Node:
 		self.rightChild = None
 		self.parent = parent
 	
-	#GETTERS
+	# GETTERS
 	# getter for the integer key
 	def getIntKey(self):
 		return self.integerKey
@@ -188,9 +188,60 @@ class BinTree:
 		self.cursor = self.root
 		self.printTraversal()
 
+# Vertex class used for Graph class
+class Vertex:
+	def __init__(self, value):
+		self.value = value
+		self.adjacentVertices = []
+	
+	# returns the value associated with this vertex
+	def getVal(self):
+		return self.value
+	
+	# returns the list of adjacent vertices to this vertex
+	def getAdjVert(self):
+		return self.adjacentVertices
+	
+	# adds an adjacent vertex to the list
+	def addAdjVert(self, vertex):
+		self.adjacentVertices.append(vertex)
+
 # Graph class
 class Graph:
-	x = 0
+	def __init__(self):
+		self.vertices = {}
+	
+	# add a vertex with a specified value
+	def addVertex(self, value):
+		# check that another vertex with the same value does not exist
+		# if one does exist, then print a message stating that
+		if(value in self.vertices):
+			print "Vertex already exists."
+		
+		# else, add the new vertex
+		else:
+			self.vertices[value] = Vertex(value)
+	
+	# add an edge between two vertices with specified values
+	def addEdge(self, value1, value2):
+		# if one or both of the vertices do not exist, then print a message stating that
+		if((value1 not in self.vertices)or(value2 not in self.vertices)):
+			print "One or more vertices not found."
+		# else, add the new edge
+		else:
+			vertex1 = self.vertices[value1]
+			vertex2 = self.vertices[value2]
+			vertex1.addAdjVert(vertex2)
+			vertex2.addAdjVert(vertex1)
+	
+	# find a vertex with a specified value
+	def findVertex(self, value):
+		# if the vertex is found, then print the key values of its adjacent vertices
+		if(value in self.vertices):
+			adjVertList = self.vertices[value].getAdjVert()
+			total = len(adjVertList)
+			for i in range(0, total):
+				print adjVertList[i].getVal()
 
 def testQueue():
 	print "\n\nTesting the Queue class..."
@@ -298,6 +349,7 @@ def testGraph():
 
 # MAIN
 # runs all tests
+
 
 print "Testing has begun!"
 #testQueue()
